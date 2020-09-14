@@ -1,6 +1,5 @@
-package com.huy.controller;
+package com.huy.controller.validateemail;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,20 +22,20 @@ public class ValidateEmailController {
 
     @GetMapping("/index")
     public String getIndex(){
-        return "index";
+        return "/WEB-INF/views/validateemail.jsp";
     }
     @PostMapping("/validate")
     String validateEmail(@RequestParam("email") String email, Model model) {
         boolean isvalid = this.validate(email);
         if (!isvalid) {
             model.addAttribute("message", "Email is invalid");
-            return "index";
+            return "/WEB-INF/views/validateemail.jsp";
         }
 
         model.addAttribute("email", email);
         String success = "success";
         model.addAttribute("success",success);
-        return "index";
+        return "/WEB-INF/views/validateemail.jsp";
     }
 
     private boolean validate(String regex) {
