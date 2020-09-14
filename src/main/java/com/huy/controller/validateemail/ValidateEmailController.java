@@ -22,20 +22,21 @@ public class ValidateEmailController {
 
     @GetMapping("/index")
     public String getIndex(){
-        return "/WEB-INF/views/validateemail.jsp";
+        return "validateemail";
     }
     @PostMapping("/validate")
     String validateEmail(@RequestParam("email") String email, Model model) {
         boolean isvalid = this.validate(email);
         if (!isvalid) {
             model.addAttribute("message", "Email is invalid");
-            return "/WEB-INF/views/validateemail.jsp";
-        }
+            model.addAttribute("isvalid", isvalid);
 
-        model.addAttribute("email", email);
-        String success = "success";
-        model.addAttribute("success",success);
-        return "/WEB-INF/views/validateemail.jsp";
+        } else {
+            model.addAttribute("message", "Email is validate");
+            model.addAttribute("isvalid", isvalid);
+        }
+        return "validateemail";
+
     }
 
     private boolean validate(String regex) {

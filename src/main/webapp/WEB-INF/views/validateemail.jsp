@@ -14,16 +14,18 @@
 <body>
 
 <h1>Email Validate</h1>
-<h3 style="color:red">${message}</h3>
+<c:choose>
+    <c:when test="${isvalid == true }">
+        <h3 style="color:green">${message}</h3>
+    </c:when>
+    <c:otherwise>
+        <h3 style="color:red">${message}</h3>
+    </c:otherwise>
+</c:choose>
 
 <form action="validate" method="post">
     <input type="text" name="email"><br>
     <input type="submit" value="Validate">
 </form>
-<h3 style="color: lawngreen">
-    <c:if test="${success != null}">
-        <c:out value="${success}"/>
-    </c:if>
-</h3>
 </body>
 </html>
